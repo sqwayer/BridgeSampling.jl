@@ -1,7 +1,7 @@
 # The BridgeSampling Module
 
  ```@docs
- BridgeSampling
+ bridgesampling(samples, log_posterior, lb, ub; tol, maxiter, names)
  ```
 
 ## Module Index
