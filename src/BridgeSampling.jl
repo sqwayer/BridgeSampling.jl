@@ -23,24 +23,6 @@ struct LogMarginalLikelihood{TV}
     g_proposal::TV
 end
 
-function bridgesampling(chn::MCMCChains.Chains, mdl::Tm, trans=missing; kwargs...) where Tm <: AbstractMCMC.AbstractModel
-    
-    samples, param_names = extract_samples(chn, mdl)
-    log_posterior, dist = log_posterior_func(mdl, param_names)
-    if isa(trans, NamedTuple)
-        trans_vec = [trans[pn] for pn in param_names]
-    else
-        trans_vec = trues(length(param_names))
-    end
-    #all(isa.(dist, Distribution{Univariate})) || throw("Multivariate distributions are not supported")
-    return bridgesampling(samples, log_posterior, dist, trans_vec; names=nothing, kwargs...)
-end
-
-function bridgesampling(chn::MCMCChains.Chains, args...; kwargs...)
-    samples = permutedims(Array(MCMCChains.get_sections(chn, :parameters)), [2,1])
-    return bridgesampling(samples, args...; kwargs...)
-end
-
 """ 
     bridgesampling(samples, log_posterior, lb, ub; tol, maxiter, names)
 
@@ -108,6 +90,25 @@ function bridgesampling(samples::AbstractMatrix, log_posterior::Function, lb, ub
     logml, i = iterative_algorithm(l₁, l₂, n₁, n₂; tol=tol, maxiter=maxiter)
     return LogMarginalLikelihood(logml, i, p_post, g_post, p_prop, g_prop)
 end
+
+function bridgesampling(chn::MCMCChains.Chains, mdl::Tm, trans=missing; kwargs...) where Tm <: AbstractMCMC.AbstractModel
+    
+    samples, param_names = extract_samples(chn, mdl)
+    log_posterior, dist = log_posterior_func(mdl, param_names)
+    if isa(trans, NamedTuple)
+        trans_vec = [trans[pn] for pn in param_names]
+    else
+        trans_vec = trues(length(param_names))
+    end
+    #all(isa.(dist, Distribution{Univariate})) || throw("Multivariate distributions are not supported")
+    return bridgesampling(samples, log_posterior, dist, trans_vec; names=nothing, kwargs...)
+end
+
+function bridgesampling(chn::MCMCChains.Chains, args...; kwargs...)
+    samples = permutedims(Array(MCMCChains.get_sections(chn, :parameters)), [2,1])
+    return bridgesampling(samples, args...; kwargs...)
+end
+
 informissing(x) = x
 informissing(x::T) where T<:Real = isinf(x) ? missing : x 
 
