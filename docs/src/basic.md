@@ -1,6 +1,6 @@
 # The BridgeSampling Module
 
  ```@docs
- Module = [BridgeSampling]
+ bridgesampling(samples, log_posterior, lb, ub)
  ```
 
