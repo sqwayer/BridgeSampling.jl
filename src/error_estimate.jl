@@ -1,10 +1,10 @@
 function error_estimate(LML)
-    rmse = rel_mean_se(LML.p_posterior, LML.p_proposal, LML.g_posterior, LML.g_proposal)
-    return (rmse = rmse, cv = sqrt(rmse), percent = sqrt(rmse)*100)
-end
+    lm = value(LML)
+    p_posterior = exp.(LML.p_posterior .- lm)
+    p_proposal = exp.(LML.p_proposal .- lm)
+    g_posterior = exp.(LML.g_posterior)
+    g_proposal = exp.(LML.g_proposal)
 
-## Approximate relative mean squared error
-function rel_mean_se(p_posterior, p_proposal, g_posterior, g_proposal)
     n1 = length(p_posterior)
     n2 = length(g_proposal)
     s1 = n1 / (n1+n2)
@@ -16,8 +16,8 @@ function rel_mean_se(p_posterior, p_proposal, g_posterior, g_proposal)
     
     re2 = 1/n2 * var( f1 ) / mean( f1 )^2
     re2 += ρ_f2/n1 * var( f2 ) / mean( f2 )^2
-
-    return re2
+    
+    return (rmse = re2, cv = sqrt(re2), percent = sqrt(re2)*100)
 end
 
 ## Spectrum of the autoregressive model at frequency 0

@@ -1,7 +1,7 @@
 using Documenter
 using BridgeSampling
 
-push!(LOAD_PATH,"../src/")
+#push!(LOAD_PATH,"../src/")
 makedocs(
     sitename = "BridgeSampling.jl Documentation",
     pages = [

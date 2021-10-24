@@ -114,7 +114,7 @@ informissing(x::T) where T<:Real = isinf(x) ? missing : x
 
 
 
-value(LM::LogMarginalLikelihood, log::Bool=true) = log ? LM.value : exp(LM.value)
+value(LM::LogMarginalLikelihood; log::Bool=true) = log ? LM.value : exp(LM.value)
 
 ## Bayes factor
 bayes_factor(LM1::LogMarginalLikelihood, LM2::LogMarginalLikelihood) = 
@@ -123,7 +123,7 @@ bayes_factor(LM1::LogMarginalLikelihood, LM2::LogMarginalLikelihood) =
 ## Posterior model probabilities
 function posterior_probabilities(LM::TV, prior_prob=fill(1/length(LM), length(LM))) where {T <: LogMarginalLikelihood, TV <: AbstractVector{T}}
     isprobvec(prior_prob) || throw("Prior probabilities must be a proability vector")
-    ml = value.(LM, false)
+    ml = value.(LM, log=false)
     post_prob = ml .* prior_prob
     post_prob ./= sum(post_prob)
     return post_prob
