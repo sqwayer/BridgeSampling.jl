@@ -46,5 +46,5 @@ function iterative_algorithm(l₁, l₂, n₁, n₂; tol, maxiter)
         r = rnew
     end
     @warn "Maximum number of iterations ($maxiter) reached before convergence under the tolerance level $tol"
-    return logml, i
+    return logml, maxiter
 end
