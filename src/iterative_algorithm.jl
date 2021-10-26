@@ -32,8 +32,11 @@ function iterative_algorithm(l₁, l₂, n₁, n₂; tol, maxiter)
         numterm = 0.0
         denomterm = 0.0
         for (l₁ⱼ, l₂ⱼ) in zip(l₁, l₂)
-            numterm += exp(l₂ⱼ - lstar) / (s₁ * exp(l₂ⱼ - lstar) + s₂ * r)
-            denomterm += 1 / (s₁ * exp(l₁ⱼ - lstar) + s₂ * r)
+            el1 = clamp(exp(l₁ⱼ - lstar), 0.0, 1e100) # Avoiding numerical errors
+            el2 = clamp(exp(l₂ⱼ - lstar), 1e-100, 1e100)
+            numterm += el2 / (s₁ * el2 + s₂ * r)
+            denomterm += 1 / (s₁ * el1 + s₂ * r)
+
         end
         rnew = (1/n₂) * numterm / (denomterm / n₁)
         
