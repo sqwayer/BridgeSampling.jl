@@ -1,6 +1,5 @@
-
 module BridgeSampling
-using Turing, StatsBase
+using Turing, StatsBase, Printf
 using LinearAlgebra: dot
 import Base: show
 
@@ -131,9 +130,10 @@ end
 
 ## Show
 function Base.show(io::IO, ::MIME"text/plain", LML::LogMarginalLikelihood)
-    println(io, "Log-marginal likelihood ≈ $(LML.value) ($(LML.niter) iterations)")
+    @printf(io, "Log-marginal likelihood ≈ %.3f (%d iterations)", LML.value, LML.niter)
     err = error_estimate(LML)
-    println(io, "Error estimate : $(err.percent)%")
+    println(io)
+    @printf(io, "Error estimate : %.3f %%", err.percent)
 end
 
 end 

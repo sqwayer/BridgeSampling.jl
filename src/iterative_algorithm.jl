@@ -29,8 +29,13 @@ function iterative_algorithm(l₁, l₂, n₁, n₂; tol, maxiter)
     logml = -Inf
     ϵ = 0.0 
     for i = 1:maxiter
-        rnew = sum(exp.(l₂ .- lstar) ./ (s₁ .* exp.(l₂ .- lstar) .+ s₂ * r) ) / n₂
-        rnew /= sum(1 ./ (s₁ .* exp.(l₁ .- lstar).+ s₂ * r) ) / n₁
+        numterm = 0.0
+        denomterm = 0.0
+        for (l₁ⱼ, l₂ⱼ) in zip(l₁, l₂)
+            numterm += exp(l₂ⱼ - lstar) / (s₁ * exp(l₂ⱼ - lstar) + s₂ * r)
+            denomterm += 1 / (s₁ * exp(l₁ⱼ - lstar) + s₂ * r)
+        end
+        rnew = (1/n₂) * numterm / (denomterm / n₁)
         
         logmlnew = log(rnew) + lstar
         ϵ = abs((logmlnew - logml) / logmlnew)
@@ -41,5 +46,5 @@ function iterative_algorithm(l₁, l₂, n₁, n₂; tol, maxiter)
         r = rnew
     end
     @warn "Maximum number of iterations ($maxiter) reached before convergence under the tolerance level $tol"
-    return logmlnew, i
+    return logml, i
 end

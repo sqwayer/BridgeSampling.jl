@@ -1,9 +1,8 @@
 # The BridgeSampling Module
 
- ```@autodocs
-Modules = [BridgeSampling]
-Order = [:function]
+ ```@docs
+bridgesampling(::AbstractMatrix{T} where T, ::Function, ::Any, ::Any; tol=1e-10, maxiter=1_000, names=nothing)
  ```
 
- 
+
 
