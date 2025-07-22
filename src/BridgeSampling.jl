@@ -1,5 +1,5 @@
 module BridgeSampling
-using Turing, StatsBase, Printf
+using Turing, StatsBase, Printf, AbstractMCMC
 using LinearAlgebra: dot
 import Base: show
 
