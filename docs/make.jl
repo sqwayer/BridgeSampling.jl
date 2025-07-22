@@ -5,7 +5,6 @@ makedocs(
     sitename = "BridgeSampling.jl Documentation",
     pages = [
         "Index" => "index.md",
-        "Basic usage" => "basic.md",
     ],
     format = Documenter.HTML(prettyurls = false),
     modules = [BridgeSampling]
