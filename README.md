@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://sqwayer.github.io/BridgeSampling.jl/dev/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://sqwayer.github.io/BridgeSampling.jl/dev/)
 
-[WIP] A Julia package for computing Normalizing Constants (aka Marginal Likelihoods), Bayes Factors and Posterior Model Probabilities.
+A Julia package for computing Normalizing Constants (aka Marginal Likelihoods), Bayes Factors and Posterior Model Probabilities.
 
 This is a Julia version of the [R package](https://github.com/quentingronau/bridgesampling) `bridgesampling`, rewrote from scratch.
 
