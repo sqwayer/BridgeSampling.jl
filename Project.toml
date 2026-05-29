@@ -1,7 +1,7 @@
 name = "BridgeSampling"
 uuid = "0eb5b53f-ba9a-4031-a8e1-d982133745c7"
 authors = ["Sami Beaumont <sami.beaumont@yahoo.fr>"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 AbstractMCMC = "80f14c24-f653-4e6a-9b94-39d6b0f70001"
