@@ -1,7 +1,7 @@
 name = "BridgeSampling"
 uuid = "0eb5b53f-ba9a-4031-a8e1-d982133745c7"
-authors = ["Sami Beaumont <sami.beaumont@yahoo.fr>"]
 version = "0.2.1"
+authors = ["Sami Beaumont <sami.beaumont@yahoo.fr>"]
 
 [deps]
 AbstractMCMC = "80f14c24-f653-4e6a-9b94-39d6b0f70001"
@@ -17,5 +17,6 @@ Turing = "fce5fe82-541a-59a6-adf8-730c64b5f9a0"
 [compat]
 AbstractMCMC = "5.6.3"
 Bijectors = "0.15.12"
+Distributions = "0.25"
 StatsBase = "0.34"
 Turing = "0.39, 0.40, 0.41"
