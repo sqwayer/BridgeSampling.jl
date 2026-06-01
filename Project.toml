@@ -16,7 +16,7 @@ Turing = "fce5fe82-541a-59a6-adf8-730c64b5f9a0"
 
 [compat]
 AbstractMCMC = "5.6.3"
-Bijectors = "0.15.12"
+Bijectors = "0.15.12, 0.16"
 Distributions = "0.25"
 StatsBase = "0.34"
 Turing = "0.39, 0.40, 0.41"
